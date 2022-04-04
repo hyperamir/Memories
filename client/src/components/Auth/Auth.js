@@ -7,22 +7,33 @@ import GoogleLogin from 'react-google-login';
 import Icon from './Icon';
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {signin, signup} from '../../actions/auth';
+
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
 const Auth = () => {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState(initialState);
   const [isSignUp, setIsSignUp] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleShowPassword = () => setShowPassword(prev => !prev);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    if(isSignUp){
+      dispatch(signup(formData, navigate));
+    }else{
+      dispatch(signin(formData, navigate));
 
+    }
   }
 
-  const handleChange = () => {
-
+  const handleChange = (e) => {
+    setFormData({...formData, [e.target.name]: e.target.value })
   }
 
   const switchMode = () => {
@@ -58,7 +69,7 @@ const Auth = () => {
             {isSignUp && (
               <>
                 <Input name='firstName' label='First Name' handleChange={handleChange} autoFocus half />
-                <Input name='firstName' label='First Name' handleChange={handleChange} half />
+                <Input name='lastName' label='Last Name' handleChange={handleChange} half />
               </>
             )}
             <Input name='email' label='Email Address' handleChange={handleChange} type='email' />
