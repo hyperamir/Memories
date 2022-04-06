@@ -1,6 +1,6 @@
-import User from '../models/user.js';
-import bycrypt from 'bcrypt';
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import User from '../models/user.js';
 
 export const signin = async (req, res) => {
   const { email, password } = req.body;
@@ -10,7 +10,7 @@ export const signin = async (req, res) => {
 
     if (!existingUser) return res.status(404).json({ message: "User does not exist." });
 
-    const isPasswordCorrect = await bycrypt.compare(password, existingUser.password);
+    const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
 
     if (!isPasswordCorrect) return res.status(400).json({ message: "Incorrect credentials." });
 
@@ -25,6 +25,7 @@ export const signin = async (req, res) => {
 }
 
 export const signup = async (req, res) => {
+  
   const { firstName, lastName, email, password, confirmPassword } = req.body;
 
   try {
@@ -34,7 +35,7 @@ export const signup = async (req, res) => {
 
     if (password !== confirmPassword) return res.status(400).json({ message: "Passwords don't match." });
 
-    const hashedPassword = await bycrypt.hash(password, 12);
+    const hashedPassword = await bcrypt.hash(password, 12);
 
     const createdUser = await User.create({ email, password: hashedPassword, name: `${firstName} ${lastName}` });
 
