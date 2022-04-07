@@ -7,6 +7,7 @@ import Auth from './components/Auth/Auth';
 import PostDetails from './components/PostDetails/PostDetails';
 
 function App() {
+  const user = JSON.parse(localStorage.getItem('profile'));
 
   return (
     <Router>
@@ -17,7 +18,7 @@ function App() {
           <Route path='/posts' element={<Home />} />
           <Route path='/posts/search' element={<Home />} />
           <Route path='/posts/:id' element={<PostDetails />} />
-          <Route path='/auth' element={<Auth />} />
+          <Route path='/auth' element={!user ? <Auth /> : <Navigate to='/posts' />} />
         </Routes>
       </Container>
     </Router>
