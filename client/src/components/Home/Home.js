@@ -3,7 +3,7 @@ import { Container, Grow, Grid, Paper, Button, AppBar, TextField } from "@materi
 import Posts from "../Posts/Posts";
 import Form from "../Form/Form";
 import { useDispatch } from "react-redux";
-import { getPosts } from "../../actions/posts";
+import { getPosts, getPostsBySearch } from "../../actions/posts";
 import Paginate from "../Pagination";
 import { useNavigate, useLocation } from "react-router-dom";
 import ChipInput from 'material-ui-chip-input';
@@ -24,13 +24,10 @@ const Home = () => {
   const [search, setSearch] = useState('');
   const [tags, setTags] = useState([]);
 
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [currentId, dispatch]);
-
   const searchPost = () => {
-    if (search.trim()) {
-
+    if (search.trim() || tags) {
+      dispatch(getPostsBySearch({ search, tags: tags.join(',') }));
+      navigate(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);
     } else {
       navigate('/');
     }
@@ -53,7 +50,7 @@ const Home = () => {
           <Grid item xs={12} sm={6} md={9}>
             <Posts setCurrentId={setCurrentId} />
           </Grid>
-          <Grid item xs={12} sm={6} md={9}>
+          <Grid item xs={12} sm={6} md={3}>
             <AppBar className={classes.appBarSearch} position="static" color='inherit'>
               <TextField
                 name="search"
@@ -76,7 +73,7 @@ const Home = () => {
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
             <Paper elevation={6}>
-              <Paginate />
+              <Paginate page={page} />
             </Paper>
           </Grid>
         </Grid>
