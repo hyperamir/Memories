@@ -18,6 +18,17 @@ const PostDetails = () => {
     dispatch(getPost(id));
   }, [id]);
 
+  if (!post) return null;
+
+  if (isLoading) {
+    return (
+      <Paper className={classes.loadingPaper} elevation={6}>
+        <CircularProgress size='7em' />
+      </Paper>
+    );
+  }
+
+  console.log('postttt', post)
   return (
     <div className={classes.card}>
       <div className={classes.section}>
