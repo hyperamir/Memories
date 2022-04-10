@@ -32,7 +32,7 @@ export const getPostsBySearch = async (req, res) => {
 
   try {
     const title = new RegExp(searchQuery, 'i');
-    
+
     const posts = await PostMessage.find({ $or: [{ title }, { tags: { $in: tags.split(',') } }] });
     res.json({ data: posts });
   } catch (error) {
@@ -88,5 +88,17 @@ export const likePost = async (req, res) => {
   }
 
   const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true });
+  res.json(updatedPost);
+}
+
+export const commentPost = async (req, res) => {
+  const { id } = req.params;
+  const { value } = req.body;
+
+  const post = await PostMessage.findById(id);
+  post.comments.push(value);
+
+  const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true });
+
   res.json(updatedPost);
 }
