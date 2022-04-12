@@ -45,7 +45,7 @@ const Post = ({ post, setCurrentId }) => {
   }
 
   return (
-    <Card className={classes.card} raised elevation={6}>
+    <Card className={classes.card} raised elevation={6} >
       <ButtonBase className={classes.cardAction} onClick={openPost}>
         {post.selectedFile && <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />}
         <div className={classes.overlay}>
@@ -54,7 +54,10 @@ const Post = ({ post, setCurrentId }) => {
         </div>
         {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
           <div className={classes.overlay2}>
-            <Button style={{ color: 'white' }} size="small" onClick={() => setCurrentId(post._id)}>
+            <Button style={{ color: 'white' }} size="small" onClick={(e) => {
+              e.stopPropagation();
+              setCurrentId(post._id);
+            }}>
               <MoreHorizIcon fontSize="medium" />
             </Button>
           </div>

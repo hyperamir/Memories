@@ -41,7 +41,6 @@ export const getPostsBySearch = async (req, res) => {
 }
 
 export const createPost = async (req, res) => {
-  console.log('body:', req.body)
   const post = req.body;
   const newPost = new PostMessage({ ...post, creator: req.userId, createdAt: new Date().toISOString() });
 
