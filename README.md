@@ -11,25 +11,25 @@ Memories is a social media app that allows users to post interesting events that
 
 - ### Home-Page
 
-![Home-Page](https://github.com/hyperamir/DOTCOIN/blob/main/docs/Home-Page.png?raw=true)
+![Home-Page](https://github.com/hyperamir/Memories/blob/main/docs/Home-Page.png?raw=true)
 
 
 
 - ### Post-Detail
 
-![Post-Detail](https://github.com/hyperamir/DOTCOIN/blob/main/docs/Coin-Chart.png?raw=true)
+![Post-Detail](https://github.com/hyperamir/Memories/blob/main/docs/Post-Detail.png?raw=true)
 
 
 
 - ### SignUp-SignIn
 
-![SignUp-SignIn](https://github.com/hyperamir/DOTCOIN/blob/main/docs/Coin-Data.png?raw=true)
+![SignUp-SignIn](https://github.com/hyperamir/Memories/blob/main/docs/SIgn-Up.png?raw=true)
 
 
 
 - ### Search
 
-![Search](https://github.com/hyperamir/DOTCOIN/blob/main/docs/News-Search.png?raw=true)
+![Search](https://github.com/hyperamir/Memories/blob/main/docs/Search.png?raw=true)
 
 
 
